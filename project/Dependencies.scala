@@ -1,0 +1,35 @@
+import sbt._
+
+object Dependencies {
+  private object versions {
+    val doobie     = "1.0.0-M5"
+    val cats       = "2.6.1"
+    val catsEffect = "3.2.2"
+    val enumeratum = "1.7.0"
+    val pureConfig = "0.16.0"
+    val fs2        = "3.0.6"
+    val http4s     = "0.23.1"
+    val logback    = "1.2.5"
+    val circe      = "0.14.1"
+    val sqlite     = "3.36.0.1"
+  }
+
+  val libraries: Seq[ModuleID] = Seq(
+    "org.tpolecat"          %% "doobie-core"         % versions.doobie,
+    "org.tpolecat"          %% "doobie-postgres"     % versions.doobie,
+    "org.tpolecat"          %% "doobie-quill"        % versions.doobie,
+    "org.xerial"            % "sqlite-jdbc"          % versions.sqlite,
+    "org.typelevel"         %% "cats-core"           % versions.cats,
+    "org.typelevel"         %% "cats-effect"         % versions.catsEffect,
+    "com.beachape"          %% "enumeratum"          % versions.enumeratum,
+    "com.github.pureconfig" %% "pureconfig"          % versions.pureConfig,
+    "co.fs2"                %% "fs2-core"            % versions.fs2,
+    "org.http4s"            %% "http4s-blaze-server" % versions.http4s,
+    "org.http4s"            %% "http4s-blaze-client" % versions.http4s,
+    "org.http4s"            %% "http4s-dsl"          % versions.http4s,
+    "org.http4s"            %% "http4s-circe"        % versions.http4s,
+    "io.circe"              %% "circe-generic"       % versions.circe,
+    "io.circe"              %% "circe-literal"       % versions.circe,
+    "ch.qos.logback"        % "logback-classic"      % versions.logback
+  )
+}
