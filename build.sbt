@@ -9,3 +9,5 @@ organization := "function-over-form"
 libraryDependencies ++= Dependencies.libraries
 
 run / fork := true
+
+run / javaOptions += "-Dquill.binds.log=true"

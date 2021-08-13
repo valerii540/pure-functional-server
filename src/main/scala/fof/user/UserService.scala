@@ -1,13 +1,13 @@
 package fof.user
 
 import cats.effect.IO
-import fof.user.models.{CreateUser, User}
+import fof.user.models.{CreateUser, SortBy, User}
 
 import java.time.Instant
 import java.util.UUID
 
 object UserService {
-  def saveUser(createUser: CreateUser): IO[Unit] = UserDAO.addUser(
+  def addUser(createUser: CreateUser): IO[Unit] = UserDAO.addUser(
     User(
       id = UUID.randomUUID(),
       nickname = createUser.nickname,
@@ -19,5 +19,8 @@ object UserService {
     )
   )
 
-  def getUsers: IO[Seq[User]] = UserDAO.getUsers
+  def getUser(id: UUID): IO[User] = UserDAO.getUser(id)
+
+  def getUsers(sortBy: SortBy, desc: Boolean, limit: Int, offset: Int): IO[Seq[User]] =
+    UserDAO.getUsers(sortBy, desc, limit, offset)
 }
