@@ -12,6 +12,7 @@ object Dependencies {
     val logback    = "1.2.5"
     val circe      = "0.14.1"
     val sqlite     = "3.36.0.1"
+    val refined    = "0.9.27"
   }
 
   val libraries: Seq[ModuleID] = Seq(
@@ -30,6 +31,7 @@ object Dependencies {
     "org.http4s"            %% "http4s-circe"        % versions.http4s,
     "io.circe"              %% "circe-generic"       % versions.circe,
     "io.circe"              %% "circe-literal"       % versions.circe,
+    "eu.timepit"            %% "refined"             % versions.refined,
     "ch.qos.logback"        % "logback-classic"      % versions.logback
   )
 }
