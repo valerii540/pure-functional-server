@@ -1,31 +1,30 @@
 package fof.user
 
 import cats.effect.IO
-import doobie.implicits._
 import fof.user.models.{SortBy, UpdateUser, User}
 //TODO: deal with "used-unused" import CustomDBEncoders._
 import fof.common.database.CustomDBEncoders._
-import fof.common.database.DatabaseContext
 import io.getquill.Ord
 
 import java.util.UUID
 
 object UserDAO {
   import fof.common.database.DatabaseContext.dc._
+  import fof.common.extensions.QuillExtensions._
 
   def addUser(user: User): IO[Unit] =
     run {
       quote {
         query[User].insert(lift(user))
       }
-    }.transact(DatabaseContext.xa).void
+    }.transactVoid
 
   def getUser(id: UUID): IO[User] =
     run {
       quote {
         query[User].filter(_.id == lift(id))
       }
-    }.transact(DatabaseContext.xa).map(_.head)
+    }.transact.map(_.head)
 
   def getUsers(sortBy: SortBy, desc: Boolean, limit: Int, offset: Int): IO[Seq[User]] = {
     val sorted = (sortBy, desc) match {
@@ -45,7 +44,7 @@ object UserDAO {
           .drop(lift(offset))
           .take(lift(limit))
       }
-    }.transact(DatabaseContext.xa)
+    }.transact
   }
 
   def updateUser(id: UUID, newValues: UpdateUser): IO[Unit] =
@@ -60,5 +59,5 @@ object UserDAO {
             u => u.verified -> lift(newValues).verified
           )
       }
-    }.transact(DatabaseContext.xa).void
+    }.transactVoid
 }
