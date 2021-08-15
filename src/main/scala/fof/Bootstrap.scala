@@ -2,10 +2,7 @@ package fof
 
 import cats.effect._
 import fof.user.UserController
-import org.http4s.HttpRoutes
 import org.http4s.blaze.server.BlazeServerBuilder
-import org.http4s.dsl.io._
-import org.http4s.implicits._
 
 object Bootstrap extends IOApp {
 

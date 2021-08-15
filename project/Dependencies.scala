@@ -7,7 +7,7 @@ object Dependencies {
     val catsEffect = "3.2.2"
     val enumeratum = "1.7.0"
     val pureConfig = "0.16.0"
-    val fs2        = "3.0.6"
+    val fs2        = "3.1.0"
     val http4s     = "0.23.1"
     val logback    = "1.2.5"
     val circe      = "0.14.1"

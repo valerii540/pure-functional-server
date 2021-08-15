@@ -1,7 +1,7 @@
 package fof.user
 
 import cats.effect.IO
-import fof.user.models.{CreateUser, SortBy, User}
+import fof.user.models.{CreateUser, SortBy, UpdateUser, User}
 
 import java.time.Instant
 import java.util.UUID
@@ -15,7 +15,8 @@ object UserService {
       password = createUser.password,
       age = createUser.age,
       country = createUser.country,
-      created = Instant.now()
+      created = Instant.now(),
+      verified = false
     )
   )
 
@@ -23,4 +24,6 @@ object UserService {
 
   def getUsers(sortBy: SortBy, desc: Boolean, limit: Int, offset: Int): IO[Seq[User]] =
     UserDAO.getUsers(sortBy, desc, limit, offset)
+
+  def updateUser(id: UUID, newValues: UpdateUser): IO[Unit] = UserDAO.updateUser(id, newValues)
 }

@@ -9,4 +9,5 @@ final case class User(id: UUID,
                       password: String,
                       age: Int,
                       country: String,
-                      created: Instant)
+                      created: Instant,
+                      verified: Boolean)

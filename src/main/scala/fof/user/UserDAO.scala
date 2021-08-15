@@ -3,6 +3,7 @@ package fof.user
 import cats.effect.IO
 import doobie.implicits._
 import fof.user.models.{SortBy, UpdateUser, User}
+//TODO: deal with "used-unused" import CustomDBEncoders._
 import fof.common.database.CustomDBEncoders._
 import fof.common.database.DatabaseContext
 import io.getquill.Ord
@@ -47,12 +48,17 @@ object UserDAO {
     }.transact(DatabaseContext.xa)
   }
 
-  def updateUser(id: UUID, newValues: UpdateUser): IO[Unit] = {
-    quote {
-      query[User].filter(_.id == lift(id))
-    }
-
-    ???
-  }
-
+  def updateUser(id: UUID, newValues: UpdateUser): IO[Unit] =
+    run {
+      quote {
+        query[User]
+          .filter(_.id == lift(id))
+          .update(
+            u => u.password -> (lift(newValues).password getOrElse u.password),
+            u => u.country  -> (lift(newValues).country getOrElse u.country),
+            u => u.age      -> (lift(newValues).age getOrElse u.age),
+            u => u.verified -> lift(newValues).verified
+          )
+      }
+    }.transact(DatabaseContext.xa).void
 }
