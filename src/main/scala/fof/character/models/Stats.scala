@@ -2,8 +2,8 @@ package fof.character.models
 
 import eu.timepit.refined.api.Refined
 import eu.timepit.refined.auto._
-import eu.timepit.refined.numeric._
 import fof.character.models.Stats.Value
+import eu.timepit.refined.numeric.Interval
 
 final case class Stats(
     strength: Value,

@@ -5,7 +5,7 @@ import enumeratum._
 
 sealed trait Race extends EnumEntry with Lowercase
 
-object Race extends Enum[Race] {
+object Race extends Enum[Race] with CirceEnum[Race] {
   override val values: IndexedSeq[Race] = findValues
 
   case object Human    extends Race

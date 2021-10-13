@@ -1,11 +1,11 @@
 package fof.character.models.enums
 
 import enumeratum.EnumEntry._
-import enumeratum.{EnumEntry, _}
+import enumeratum._
 
-trait Clazz extends EnumEntry with Lowercase
+sealed trait Clazz extends EnumEntry with Lowercase
 
-object Clazz extends Enum[Clazz] {
+object Clazz extends Enum[Clazz] with CirceEnum[Clazz] {
   override val values: IndexedSeq[Clazz] = findValues
 
   case object Warrior extends Clazz
